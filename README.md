@@ -13,7 +13,7 @@
 * Option to inform other users about free parking spaces around them.
 * Active search mode - notification when a parking space in the area is freed by another user.
 * Payment support and payment history :
-*     - Integration with PayPal and also SMS.
+  - Integration with PayPal and also SMS.
 * Send a notification when the time is running out for the payment made in the area.
 * Maintain a list of friends.
 * Administrator support panel to allow support from users.
