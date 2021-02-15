@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_fragment_login">
+
+    <fragment
+        android:id="@+id/nav_fragment_login"
+        android:name="com.example.payparking.ui.auth.LoginFragment"
+        android:label="Nav Fragment One"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/login_to_register"
+            app:destination="@id/nav_fragment_register"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_register"
+        android:name="com.example.payparking.ui.auth.RegisterFragment"
+        android:label="Nav Fragment Two"
+        tools:layout="@layout/register_fragment">
+        <action
+            android:id="@+id/register_to_login"
+            app:destination="@id/nav_fragment_login"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_car"
+        android:name="com.example.payparking.ui.car_auth.CarFragment"
+        android:label="car_fragment"
+        tools:layout="@layout/car_fragment">
+        <action
+            android:id="@+id/car_to_manual"
+            app:destination="@id/nav_fragment_scan"/>
+        <action
+            android:id="@+id/car_to_link"
+            app:destination="@id/nav_fragment_link"/>
+        <action
+            android:id="@+id/car_to_qr"
+            app:destination="@id/nav_fragment_qr"/>
+        <action
+            android:id="@+id/car_to_map"
+            app:destination="@id/nav_fragment_map" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fragment_qr"
+        android:name="com.example.payparking.ui.car_auth.number.NumberQRFragment"
+        android:label="number_q_r_fragment"
+        tools:layout="@layout/number_q_r_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_link"
+        android:name="com.example.payparking.ui.car_auth.number.NumberLinkFragment"
+        android:label="number_link_fragment"
+        tools:layout="@layout/number_link_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_scan"
+        android:name="com.example.payparking.ui.car_auth.number.NumberScanFragment"
+        android:label="number_scan_fragment"
+        tools:layout="@layout/number_scan_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_map"
+        android:name="com.example.payparking.ui.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+
+</navigation>

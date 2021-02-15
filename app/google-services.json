@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "476385475971",
+    "firebase_url": "https://payparking-76845.firebaseio.com",
+    "project_id": "payparking-76845",
+    "storage_bucket": "payparking-76845.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476385475971:android:b034d347912cf4d2580ab6",
+        "android_client_info": {
+          "package_name": "com.example.payparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476385475971-qflhm258o4atrar43r72lsjeu8bamv96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.payparking",
+            "certificate_hash": "8dc7c1bfd1ab60c0f3d0cfb643286e1375f5ecee"
+          }
+        },
+        {
+          "client_id": "476385475971-g5tkv1ct99q31urg4v3uatidr7hr0qst.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi91CiSvkxzpwJWg1BnaxudCezZmxguB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476385475971-g5tkv1ct99q31urg4v3uatidr7hr0qst.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
