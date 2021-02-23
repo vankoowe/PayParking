@@ -1,101 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".ui.car_auth.CarFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.HomeFragment">
 
     <View
-        android:id="@+id/car_view"
+        android:id="@+id/home_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/car_next"
+        android:id="@+id/home_park"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Next"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_add_number_link"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.153" />
 
     <Button
-        android:id="@+id/car_add_number_link"
+        android:id="@+id/home_maps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorAccent3"
-        android:text="link"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimary"
+        android:text="Maps"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_add_number_qr"
+        app:layout_constraintTop_toBottomOf="@+id/home_park"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/car_add_number_qr"
+        android:id="@+id/home_friends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorAccent3"
-        android:text="QR"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimary"
+        android:text="Friends"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_add_number_scan"
+        app:layout_constraintTop_toBottomOf="@+id/home_maps"
         app:layout_constraintVertical_bias="0.0" />
 
-
     <Button
-        android:id="@+id/car_choose"
+        android:id="@+id/home_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent3"
-        android:text="Cars"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimary"
+        android:text="Share"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_number"
-        app:layout_constraintVertical_bias="0.100000024" />
-
-    <Button
-        android:id="@+id/car_add_number_scan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@color/colorAccent3"
-        android:text="Scan"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_choose"
+        app:layout_constraintTop_toBottomOf="@+id/home_friends"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/home_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent2"
+        android:text="Profile"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_share"
+        app:layout_constraintVertical_bias="0.40" />
 
     <TextView
-        android:id="@+id/car_log_out"
+        android:id="@+id/home_log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="13dp"
@@ -104,23 +100,24 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_next"
-        app:layout_constraintVertical_bias="0.00999999" />
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toEndOf="@+id/home_change_car"
+        app:layout_constraintTop_toBottomOf="@+id/home_profile"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/car_number"
+        android:id="@+id/home_change_car"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
+        android:layout_marginTop="13dp"
+        android:text="Change Car?"
+        android:textColor="@color/colorAccent3"
         android:textStyle="bold"
-        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.14999998" />
+        app:layout_constraintTop_toBottomOf="@+id/home_profile"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_fragment_login">
+    app:startDestination="@id/nav_fragment_home">
 
     <fragment
         android:id="@+id/nav_fragment_login"
@@ -40,9 +40,6 @@
         <action
             android:id="@+id/car_to_qr"
             app:destination="@id/nav_fragment_qr"/>
-        <action
-            android:id="@+id/car_to_map"
-            app:destination="@id/nav_fragment_map" />
     </fragment>
     <fragment
         android:id="@+id/nav_fragment_qr"
@@ -63,6 +60,77 @@
         android:id="@+id/nav_fragment_map"
         android:name="com.example.payparking.ui.map.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+
+        <action
+            android:id="@+id/map_to_zones"
+            app:destination="@id/nav_fragment_zones" />
+        <action
+            android:id="@+id/map_to_heatmap"
+            app:destination="@id/nav_fragment_heatmap" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fragment_home"
+        android:name="com.example.payparking.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/home_to_map"
+            app:destination="@id/nav_fragment_map" />
+        <action
+            android:id="@+id/home_to_friends"
+            app:destination="@id/nav_fragment_friends" />
+        <action
+            android:id="@+id/home_to_profile"
+            app:destination="@id/nav_fragment_profile" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fragment_friends"
+        android:name="com.example.payparking.ui.friends.FriendsFragment"
+        android:label="friends_fragment"
+        tools:layout="@layout/friends_fragment" >
+        <action
+            android:id="@+id/friends_to_search"
+            app:destination="@id/nav_fragment_search" />
+        <action
+            android:id="@+id/friends_to_requests"
+            app:destination="@id/nav_fragment_requests" />
+        <action
+            android:id="@+id/friends_to_all"
+            app:destination="@id/nav_fragment_all" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fragment_search"
+        android:name="com.example.payparking.ui.friends.search.SearchFriendsFragment"
+        android:label="search_friends_fragment"
+        tools:layout="@layout/search_friends_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_requests"
+        android:name="com.example.payparking.ui.friends.requests.FriendsRequestsFragment"
+        android:label="friends_requests_fragment"
+        tools:layout="@layout/friends_requests_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_all"
+        android:name="com.example.payparking.ui.friends.all.AllFragment"
+        android:label="all_fragment"
+        tools:layout="@layout/all_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_heatmap"
+        android:name="com.example.payparking.ui.map.heatmap.HeatMapFragment"
+        android:label="heat_map_fragment"
+        tools:layout="@layout/heat_map_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_zones"
+        android:name="com.example.payparking.ui.map.zonesmap.ZonesFragment"
+        android:label="zones_fragment"
+        tools:layout="@layout/zones_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_profile"
+        android:name="com.example.payparking.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+
 
 </navigation>

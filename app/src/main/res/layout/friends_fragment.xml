@@ -4,26 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.map.MapsFragment">
+    tools:context=".ui.friends.FriendsFragment">
 
     <View
-        android:id="@+id/maps_view"
+        android:id="@+id/friends_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/maps_zones"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:id="@+id/friends_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Zones Maps"
+        android:text="Search"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,33 +31,34 @@
         app:layout_constraintVertical_bias="0.153" />
 
     <Button
-        android:id="@+id/maps_heat_map"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:id="@+id/friends_requests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@color/colorPrimary"
-        android:text="Heat Maps"
+        android:text="Requests"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maps_zones"
+        app:layout_constraintTop_toBottomOf="@+id/friends_search"
         app:layout_constraintVertical_bias="0.0" />
 
-    <!--<ImageButton
-        android:id="@+id/maps_back"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="32dp"
+    <Button
+        android:id="@+id/friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@drawable/round_corner_button"
-        android:src="@drawable/ic_stat_name"
+        android:background="@color/colorPrimary"
+        android:text="Friends"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/maps_view"
-        app:layout_constraintVertical_bias="0.0" />-->
+        app:layout_constraintTop_toBottomOf="@+id/friends_requests"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
