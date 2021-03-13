@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.map.MapsFragment">
+    tools:context=".ui.share.MainShareFragment">
 
     <View
-        android:id="@+id/maps_view"
+        android:id="@+id/main_share_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/colorAccent"
@@ -19,11 +19,11 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/maps_zones"
+        android:id="@+id/main_share_share"
         android:layout_width="120dp"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
-        android:text="Zones Maps"
+        android:text="Share news"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,48 +33,19 @@
         app:layout_constraintVertical_bias="0.153" />
 
     <Button
-        android:id="@+id/maps_heat_map"
+        android:id="@+id/main_share_newsfeed"
         android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:background="@color/colorPrimary"
-        android:text="Heat Maps"
+        android:text="Newsfeed"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maps_zones"
+        app:layout_constraintTop_toBottomOf="@+id/main_share_share"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/maps_custom_map"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/colorPrimary"
-        android:text="Custom Maps"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maps_heat_map"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <!--<ImageButton
-        android:id="@+id/maps_back"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/round_corner_button"
-        android:src="@drawable/ic_stat_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/maps_view"
-        app:layout_constraintVertical_bias="0.0" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

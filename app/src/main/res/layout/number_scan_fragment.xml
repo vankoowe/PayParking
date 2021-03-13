@@ -1,33 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".ui.car_auth.number.NumberScanFragment">
 
-    <View
-        android:id="@+id/scan_view"
+    <ImageView
+        android:id="@+id/ocrImageView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="450dp"
+        android:layout_centerHorizontal="true"/>
 
-
-    <TextView
-        android:id="@+id/scan_welcome"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/actionContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="Number Scan"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@+id/ocrImageView"
+        android:weightSum="3"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/selectImageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Image"
+            android:layout_gravity="left"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/captureImageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Capture Image"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/processImageBtn"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recognize Text" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/ocrResultEt"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/actionContainer"
+        android:background="@android:color/transparent"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:hint="Detected text will appear here."/>
+
+    <LinearLayout
+        android:id="@+id/actionContainere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ocrResultEt"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/scan_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car"
+            android:layout_gravity="left"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</RelativeLayout>
+

@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/all_container"
-    android:background="@color/colorAccent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:orientation="vertical">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile.payments.MyPaymentsFragment"
+    android:orientation="vertical"
+    android:background="@color/colorAccent"
+    >
 
     <TextView
-        android:id="@+id/all_welcome"
+        android:id="@+id/payments_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="Friends"
+        android:text="Payments"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
@@ -27,12 +26,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/all_rv"
+        android:id="@+id/payments_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
         android:layout_margin="10dp"/>
-
-
 
 </LinearLayout>

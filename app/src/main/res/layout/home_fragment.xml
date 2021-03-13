@@ -77,18 +77,35 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
+        android:id="@+id/home_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorAccent4"
+        android:text="Pay"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:enabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_share"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
         android:id="@+id/home_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent2"
+        android:layout_marginTop="32dp"
         android:text="Profile"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_share"
-        app:layout_constraintVertical_bias="0.40" />
+        app:layout_constraintTop_toBottomOf="@+id/home_pay"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/home_log_out"
@@ -119,5 +136,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_profile"
         app:layout_constraintVertical_bias="0.0" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -108,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/car_next"
         app:layout_constraintVertical_bias="0.00999999" />
 
-    <TextView
+    <EditText
         android:id="@+id/car_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,5 +122,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.14999998" />
+
+    <ImageView
+        android:id="@+id/car_bluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/round_corner_button"
+        android:padding="3dp"
+        android:src="@android:drawable/stat_sys_data_bluetooth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

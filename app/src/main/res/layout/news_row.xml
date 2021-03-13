@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/news_row_container"
+    android:layout_width="match_parent"
+    android:layout_height="204dp"
+    android:background="@drawable/edittext_border"
+    android:orientation="vertical"
+    android:padding="7dp">
+
+    <TextView
+        android:id="@+id/description_news_row"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerVertical="false"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="30dp"
+        android:padding="6dp"
+        android:text="Description:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/name_address_news_row"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:padding="6dp"
+        android:text="Name:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/date_news_row"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:padding="6dp"
+        android:text="Date"
+        android:textAlignment="viewEnd"
+        android:textSize="14dp" />
+
+
+</RelativeLayout>

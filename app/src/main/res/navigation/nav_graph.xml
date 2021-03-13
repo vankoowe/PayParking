@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_fragment_home">
+    app:startDestination="@id/nav_fragment_login">
 
     <fragment
         android:id="@+id/nav_fragment_login"
@@ -40,6 +40,9 @@
         <action
             android:id="@+id/car_to_qr"
             app:destination="@id/nav_fragment_qr"/>
+        <action
+            android:id="@+id/car_to_bluetooth"
+            app:destination="@id/nav_fragment_bluetooth" />
     </fragment>
     <fragment
         android:id="@+id/nav_fragment_qr"
@@ -55,7 +58,11 @@
         android:id="@+id/nav_fragment_scan"
         android:name="com.example.payparking.ui.car_auth.number.NumberScanFragment"
         android:label="number_scan_fragment"
-        tools:layout="@layout/number_scan_fragment" />
+        tools:layout="@layout/number_scan_fragment" >
+        <action
+            android:id="@+id/action_nav_fragment_scan_to_nav_fragment_car"
+            app:destination="@id/nav_fragment_car" />
+    </fragment>
     <fragment
         android:id="@+id/nav_fragment_map"
         android:name="com.example.payparking.ui.map.MapsFragment"
@@ -68,12 +75,16 @@
         <action
             android:id="@+id/map_to_heatmap"
             app:destination="@id/nav_fragment_heatmap" />
+        <action
+            android:id="@+id/action_nav_fragment_map_to_nav_fragment_custom"
+            app:destination="@id/nav_fragment_custom" />
     </fragment>
     <fragment
         android:id="@+id/nav_fragment_home"
         android:name="com.example.payparking.ui.home.HomeFragment"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" >
+        tools:layout="@layout/home_fragment"
+        app:startDestination="@id/home_to_profile">
         <action
             android:id="@+id/home_to_map"
             app:destination="@id/nav_fragment_map" />
@@ -83,6 +94,12 @@
         <action
             android:id="@+id/home_to_profile"
             app:destination="@id/nav_fragment_profile" />
+        <action
+            android:id="@+id/home_to_main_share"
+            app:destination="@id/nav_fragment_main_share" />
+        <action
+            android:id="@+id/action_nav_fragment_home_to_nav_fragment_payment"
+            app:destination="@id/nav_fragment_payment" />
 
 
     </fragment>
@@ -130,7 +147,66 @@
         android:id="@+id/nav_fragment_profile"
         android:name="com.example.payparking.ui.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
-
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/profile_to_payments"
+            app:destination="@id/nav_fragment_payments" />
+        <action
+            android:id="@+id/profile_to_mycars"
+            app:destination="@id/nav_fragment_mycars" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fragment_share"
+        android:name="com.example.payparking.ui.share.make_news.ShareFragment"
+        android:label="share_fragment"
+        tools:layout="@layout/share_fragment" >
+        <action
+            android:id="@+id/action_nav_fragment_share_to_nav_fragment_main_share"
+            app:destination="@id/nav_fragment_main_share"
+            app:popUpTo="@+id/a"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fragment_main_share"
+        android:name="com.example.payparking.ui.share.MainShareFragment"
+        android:label="main_share_fragment"
+        tools:layout="@layout/main_share_fragment" >
+        <action
+            android:id="@+id/main_share_to_newsfeed"
+            app:destination="@id/nav_fragment_newsfeed" />
+        <action
+            android:id="@+id/main_share_to_share"
+            app:destination="@id/nav_fragment_share" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_fragment_newsfeed"
+        android:name="com.example.payparking.ui.share.newsfeed.NewsfeedFragment"
+        android:label="newsfeed_fragment"
+        tools:layout="@layout/newsfeed_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_payment"
+        android:name="com.example.payparking.ui.pay.PayFragment"
+        android:label="payment_fragment"
+        tools:layout="@layout/pay_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_bluetooth"
+        android:name="com.example.payparking.ui.bluetooth.Bluetooth"
+        android:label="bluetooth_fragment"
+        tools:layout="@layout/bluetooth_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_custom"
+        android:name="com.example.payparking.ui.profile.CustomFragment"
+        android:label="custom_fragment"
+        tools:layout="@layout/custom_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_payments"
+        android:name="com.example.payparking.ui.profile.payments.MyPaymentsFragment"
+        android:label="my_payments_fragment"
+        tools:layout="@layout/my_payments_fragment" />
+    <fragment
+        android:id="@+id/nav_fragment_mycars"
+        android:name="com.example.payparking.ui.profile.cars.MyCarsFragment"
+        android:label="my_cars_fragment"
+        tools:layout="@layout/my_cars_fragment" />
 
 </navigation>

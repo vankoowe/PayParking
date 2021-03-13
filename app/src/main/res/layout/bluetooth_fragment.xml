@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.bluetooth.Bluetooth"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment="center"
+        android:padding="5dp"
+        android:text=""
+        android:id="@+id/bluetoothStatusTv"/>
+
+    <ImageView
+        android:id="@+id/bluetoothIv"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        android:src="@drawable/ic_bluetooth_off"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Turn On"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
+        android:id="@+id/turnOnBtn"
+        android:minWidth="200dp"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Turn Off"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
+        android:id="@+id/turnOffBtn"
+        android:minWidth="200dp"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Discoverable"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
+        android:id="@+id/discoverableBtn"
+        android:minWidth="200dp"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Get Paired Devices"
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
+        android:id="@+id/pairedBtn"
+        android:minWidth="200dp"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textColor="#000"
+        android:padding="15dp"
+        android:id="@+id/pairedTv" />
+
+</LinearLayout>

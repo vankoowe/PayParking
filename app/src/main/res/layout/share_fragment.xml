@@ -1,13 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.share.ShareFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.share.make_news.ShareFragment">
+
+    <View
+        android:id="@+id/share_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/share_reload"
+        android:layout_width="144dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorAccent3"
+        android:text="Load address"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_spinner"
+        app:layout_constraintVertical_bias="0.00999999" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/share_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text="Share situation"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100000024" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/share_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@color/colorPrimary"
+        android:text="Submit"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_reload"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/share_spinner"
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/Spinner"
+        android:entries="@array/share_spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_send_to"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/share_description"
+        android:layout_width="328dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittext_border"
+        android:gravity="top|left"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:maxLines="5"
+        android:minLines="3"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_address"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/share_address"
+        android:layout_width="328dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Address"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_title"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/share_send_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-light"
+        android:text="Send to:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_description"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
