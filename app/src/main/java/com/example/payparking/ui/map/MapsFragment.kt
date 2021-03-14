@@ -40,6 +40,8 @@ class MapsFragment : Fragment() {
         //maps_back.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_home))
         maps_heat_map.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_heatmap))
         maps_zones.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_zones))
+        maps_custom_map.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_custom))
+
     }
 
 }
