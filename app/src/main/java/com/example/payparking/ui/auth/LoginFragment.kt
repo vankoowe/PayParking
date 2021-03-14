@@ -95,7 +95,7 @@ class LoginFragment : Fragment() {
         val currentUser = auth.currentUser
         val navController = findNavController()
         if(currentUser != null){
-            navController.navigate(R.id.nav_fragment_car)
+            navController.navigate(R.id.nav_fragment_home)
 
         }else{
 

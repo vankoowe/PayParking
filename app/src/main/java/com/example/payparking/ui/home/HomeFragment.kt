@@ -1,6 +1,7 @@
 package com.example.payparking.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.ContentValues
 import android.content.Context
@@ -13,6 +14,7 @@ import android.location.Location
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,8 +29,10 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.cardinalcommerce.shared.userinterfaces.ProgressDialog
 import com.example.payparking.MainActivity
 import com.example.payparking.R
 import com.example.payparking.viewmodel.HomeViewModel
@@ -40,13 +44,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.maps.android.PolyUtil
-import kotlinx.android.synthetic.main.car_fragment.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.json.JSONArray
 import org.json.JSONException
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
+import kotlin.random.Random
 
 class HomeFragment : Fragment() {
 
@@ -60,16 +67,21 @@ class HomeFragment : Fragment() {
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
     private var lastLocation: Location? = null
-
+    private var alarmMgr: AlarmManager? = null
+    private lateinit var alarmIntent: PendingIntent
     private lateinit var viewModel: HomeViewModel
     private lateinit var auth: FirebaseAuth
     private var mDatabaseReference: DatabaseReference? = null
+    private var mDatabaseReference4: DatabaseReference? = null
+
     private var mDatabase: FirebaseDatabase? = null
 
     val CHANNEL_ID = "channelId"
     val CHANNEL_NAME = "channelName"
     val NOTIFICATION__ID =0
-
+    val handler: Handler = Handler()
+    val delay = 1000 // 1000 milliseconds == 1 second
+    var i = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -133,28 +145,127 @@ class HomeFragment : Fragment() {
             notification.createNotificationChannel(channel)
         }
     }
+
+
+    @SuppressLint("SimpleDateFormat")
     override fun onStart() {
         super.onStart()
-        /*createNotificationChannel()
 
-        val intent = Intent(requireContext(), MainActivity::class.java)
-        val pendingIntent = TaskStackBuilder.create(requireContext()).run {
-            addNextIntentWithParentStack(intent)
-            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-        }
-        val notification = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-            .setContentTitle("Samo Levski")
-            .setContentText("aswertyu")
-            .setSmallIcon(R.drawable.logo)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent)
-            .build()
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.progress_dialog, null)
+        builder.setView(dialogView)
+        val progressDialog = builder.create()
+        progressDialog.show()
 
-        val notManager = NotificationManagerCompat.from(requireContext())
+        Handler().postDelayed({progressDialog.dismiss()}, 10000)
 
-        notManager.notify(NOTIFICATION__ID, notification)*/
         auth = Firebase.auth
+        var locations: ArrayList<String>? = ArrayList()
+
         val userId = auth.currentUser!!.uid
+        mDatabase = FirebaseDatabase.getInstance()
+        mDatabaseReference4 = mDatabase!!.reference.child("Free")
+        val postListenerr = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                createNotificationChannel()
+                val GROUP_KEY_WORK_EMAIL = "com.android.example.WORK_EMAIL"
+                val SUMMARY_ID = 0
+
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                val pendingIntent = TaskStackBuilder.create(requireContext()).run {
+                    addNextIntentWithParentStack(intent)
+                    getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+                }
+                /*val pendingIntent = NavDeepLinkBuilder(requireContext())
+                    .setComponentName(MainActivity::class.java)
+                    .setGraph(R.navigation.nav_graph)
+                    .setDestination(R.id.nav_fragment_search)
+                    //.setArguments(bundle)
+                    .createPendingIntent()*/
+
+                val notManager = NotificationManagerCompat.from(requireContext())
+
+                for (childSnapshot in dataSnapshot.children) {
+                    //if(childSnapshot.key.toString()=="1"){
+                    locations!!.add(childSnapshot.key.toString())
+
+                    val notification = NotificationCompat.Builder(
+                        requireContext(),
+                        CHANNEL_ID
+                    )
+                        .setContentTitle("Pay Parking")
+                        .setContentText(childSnapshot.key.toString()+": "+childSnapshot.value.toString())
+                        .setSmallIcon(R.drawable.logo)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setContentIntent(pendingIntent)
+                        .setGroup(GROUP_KEY_WORK_EMAIL)
+                        .build()
+
+                    val summaryNotification = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+                        .setContentTitle("Summary")
+                        //set content text to support devices running API level < 24
+                        .setContentText(i.toString() + " new messages")
+                        .setSmallIcon(R.drawable.logo)
+
+                        //specify which group this notification belongs to
+                        .setGroup(GROUP_KEY_WORK_EMAIL)
+                        //set this notification as the summary for the group
+                        .setGroupSummary(true)
+
+                    notManager.notify(i, notification)
+                    notManager.notify(SUMMARY_ID, summaryNotification.build())
+                    i++
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        mDatabaseReference4!!.addValueEventListener(postListenerr)
+
+        lateinit var address: String
+        //val userId = auth.currentUser!!.uid
+        mDatabaseReference = mDatabase!!.reference
+
+        val currentUserDb = mDatabaseReference!!.child("Heat_Map").child(userId)
+        val c = mDatabaseReference!!.child("Free")
+        val postListenerre = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val lat = dataSnapshot.child("lat").value
+                val long = dataSnapshot.child("long").value
+
+                if (long!=null && lat !=null) {
+
+                    val geocoder: Geocoder
+                    val addresses: List<Address>
+                    geocoder = Geocoder(context, Locale.getDefault())
+
+                    addresses = geocoder.getFromLocation(
+                        lat as Double, long as Double,
+                        1
+                    ) // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+
+
+                    address =
+                        addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        currentUserDb!!.addValueEventListener(postListenerre)
+
+
+        // try to touch View of UI thread*/
+
+
+        auth = Firebase.auth
+        //val userId = auth.currentUser!!.uid
         mDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mDatabase!!.reference.child("Heat_Map")
         val postListener = object : ValueEventListener {
@@ -167,9 +278,15 @@ class HomeFragment : Fragment() {
                     }
                 }
                 if (flag) {
-                    home_park.setText("END PARK")
+                    home_park!!.text = getString(R.string.end)
+                    home_pay.isEnabled = true
+                    home_pay.setBackgroundColor(Color.parseColor("#5BC236"))
+                    progressDialog.dismiss()
                 } else {
-                    home_park.setText("Park")
+                    home_park!!.text = getString(R.string.park)
+                    home_pay.isEnabled = false
+                    home_pay.setBackgroundColor(Color.parseColor("#808080"))
+                    progressDialog.dismiss()
                 }
             }
 
@@ -182,73 +299,88 @@ class HomeFragment : Fragment() {
 
         home_log_out?.setOnClickListener{signOut()}
         home_change_car?.setOnClickListener{
-            findNavController().navigate(R.id.nav_fragment_login)
+            findNavController().navigate(R.id.nav_fragment_car)
         }
 
+        home_pay.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_payment))
         home_maps.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_map))
         home_profile.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_profile))
 
         home_park.setOnClickListener{
             if(home_park.text.equals("Park")){
-                    if (!checkPermissions()) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            requestPermissions()
-                        }
-                    } else {
-                        getLastLocation()
-                        //home_park.isEnabled = false
-                        home_park.setText("END PARK")
+                if (!checkPermissions()) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions()
                     }
+                } else {
+
+                    getLastLocation()
+                    //home_park.isEnabled = false
+                    home_park!!.text = getString(R.string.end)
+                    home_pay.isEnabled = true
+                    home_pay.setBackgroundColor(Color.parseColor("#5BC236"))
+
+                }
             }else if(home_park.text.equals("END PARK")){
                 auth = Firebase.auth
                 mDatabase = FirebaseDatabase.getInstance()
-                mDatabaseReference = mDatabase!!.reference.child("Heat_Map")
-                val userId = auth.currentUser!!.uid
-                val currentUserDb = mDatabaseReference!!.child(userId)
+                mDatabaseReference = mDatabase!!.reference
 
                 currentUserDb.child("lat").removeValue()
                 currentUserDb.child("long").removeValue()
                 currentUserDb.child("zone").removeValue()
-                home_park.setText("Park")
+                //mDatabaseReference = mDatabase!!.reference.child("Free")
+                val currentDateTime =
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        LocalDateTime.now()
+                    } else {
+                        TODO("VERSION.SDK_INT < O")
+                    }
+                val time =
+                    currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                        .toString()
+                val c = mDatabaseReference!!.child("Free")
+                c.child(time).setValue(address)
 
+                home_park!!.text = getString(R.string.park)
+                home_pay.isEnabled = false
+                home_pay.setBackgroundColor(Color.parseColor("#808080"))
             }
         }
-        home_share.setOnClickListener {
-            if (ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {}else {
-                fusedLocationClient?.lastLocation!!.addOnCompleteListener { task ->
-                    if (task.isSuccessful && task.result != null) {
-                        lastLocation = task.result
-                        val geocoder: Geocoder
-                        val addresses: List<Address>
-                        geocoder = Geocoder(context, Locale.getDefault())
+        home_share.setOnClickListener{
 
-                        addresses = geocoder.getFromLocation(
-                            (lastLocation)!!.latitude,
-                            (lastLocation)!!.longitude,
-                            1
-                        ) // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            mDatabaseReference = mDatabase!!.reference.child("Users").child(userId)
+            val usersId: java.util.ArrayList<String> = java.util.ArrayList()
+            //var name: String? = null
+            val postListener2 = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // Get Post object and use the values to update the UI
 
-
-                        val address: String =
-                            addresses[0].getAddressLine(0) // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-
-                        val city: String = addresses[0].getLocality()
-                        val state: String = addresses[0].getAdminArea()
-                        val country: String = addresses[0].getCountryName()
-                        Toast.makeText(context, address, Toast.LENGTH_LONG).show()
-
+                    for(childSnapshot in dataSnapshot.child("News").children){
+                        if(verifyNews(childSnapshot.key.toString())){
+                            mDatabaseReference!!.child("News").child(childSnapshot.key.toString()).removeValue()
+                        }
                     }
+
+
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w(
+                        ContentValues.TAG,
+                        "loadPost:onCancelled",
+                        databaseError.toException()
+                    )
                 }
             }
+            mDatabaseReference!!.addValueEventListener(postListener2)
+            findNavController().navigate(R.id.nav_fragment_main_share)
         }
+
         home_friends.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.nav_fragment_friends))
+        mDatabaseReference4!!.removeValue()
+
     }
 
     private fun getLastLocation() {
@@ -288,17 +420,72 @@ class HomeFragment : Fragment() {
                             readZones(R.raw.bluezones),
                             true
                         )
-                    //println("contains1: $contains1")
-                    if(containsb){
-                        Toast.makeText(context, "You are in blue zone", Toast.LENGTH_LONG).show()
-                        currentUserDb.child("zone").setValue("2")
-                    }else if(containsg){
-                        Toast.makeText(context, "You are in green zone", Toast.LENGTH_LONG).show()
-                        currentUserDb.child("zone").setValue("3")
-                    }else{
-                        Toast.makeText(context, "You are not in zone", Toast.LENGTH_LONG).show()
-                        currentUserDb.child("zone").setValue("1")
+
+                    createNotificationChannel()
+
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    val pendingIntent = TaskStackBuilder.create(requireContext()).run {
+                        addNextIntentWithParentStack(intent)
+                        getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
                     }
+
+                    when {
+                        containsb -> {
+                            Toast.makeText(context, "You are in blue zone", Toast.LENGTH_LONG).show()
+
+                            val notification = NotificationCompat.Builder(
+                                requireContext(),
+                                CHANNEL_ID
+                            )
+                                .setContentTitle("Pay Parking")
+                                .setContentText("Паркира в синя зона. Платете чрез PayPal или SMS. 2лв./ч.")
+                                .setSmallIcon(R.drawable.logo)
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setContentIntent(pendingIntent)
+                                .build()
+                            val notManager = NotificationManagerCompat.from(requireContext())
+                            notManager.notify(NOTIFICATION__ID, notification)
+
+                            currentUserDb.child("zone").setValue("2")
+                        }
+                        containsg -> {
+                            Toast.makeText(context, "You are in green zone", Toast.LENGTH_LONG).show()
+
+                            val notification = NotificationCompat.Builder(
+                                requireContext(),
+                                CHANNEL_ID
+                            )
+                                .setContentTitle("Pay Parking")
+                                .setContentText("Паркира в зелена зона. Платете чрез PayPal или SMS. 1лв./ч.")
+                                .setSmallIcon(R.drawable.logo)
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setContentIntent(pendingIntent)
+                                .build()
+                            val notManager = NotificationManagerCompat.from(requireContext())
+                            notManager.notify(NOTIFICATION__ID, notification)
+
+                            currentUserDb.child("zone").setValue("3")
+                        }
+                        else -> {
+                            Toast.makeText(context, "You are not in zone", Toast.LENGTH_LONG).show()
+
+                            val notification = NotificationCompat.Builder(
+                                requireContext(),
+                                CHANNEL_ID
+                            )
+                                .setContentTitle("Pay Parking")
+                                .setContentText("Паркирахте извън зоната. Няма нужда да плащате.")
+                                .setSmallIcon(R.drawable.logo)
+                                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                .setContentIntent(pendingIntent)
+                                .build()
+                            val notManager = NotificationManagerCompat.from(requireContext())
+                            notManager.notify(NOTIFICATION__ID, notification)
+
+                            currentUserDb.child("zone").setValue("1")
+                        }
+                    }
+
                 }
                 else {
                     Log.w(TAG, "getLastLocation:exception", task.exception)
@@ -402,8 +589,27 @@ class HomeFragment : Fragment() {
         findNavController().navigate(R.id.nav_fragment_login)
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    @SuppressLint("SimpleDateFormat")
+    private fun verifyNews(newsDate: String): Boolean {
+        //val toyBornTime = "2014-06-18 12:56:50"
+        val dateFormat = SimpleDateFormat(
+            "yyyy-MM-dd HH:mm:ss"
+        )
+        val oldDate: Date? = dateFormat.parse(newsDate)
+
+        val currentDate = Date()
+
+        val diff = currentDate.time - oldDate!!.time
+        val seconds = diff / 1000
+        val minutes = seconds / 60
+
+
+        if (oldDate.before(currentDate)) {
+            if(minutes>15){
+                return true
+            }
+        }
+        return false
     }
 
 }

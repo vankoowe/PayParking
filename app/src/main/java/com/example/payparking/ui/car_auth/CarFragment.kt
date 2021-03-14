@@ -74,7 +74,7 @@ class CarFragment : Fragment() {
                     val userId = auth.currentUser!!.uid
 
                     val currentUserDb = mDatabaseReference!!.child(userId)
-                    currentUserDb.child("Cars").child(result.contents).child("active").setValue("1")
+                    currentUserDb.child("Cars").child(result.contents).setValue("1")
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
@@ -93,7 +93,9 @@ class CarFragment : Fragment() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 for (childSnapshot in dataSnapshot.children) {
-                        cars.add(childSnapshot.key.toString())
+                        if(childSnapshot.key.toString().equals("active") == false) {
+                            cars.add(childSnapshot.key.toString())
+                        }
                 }
             }
 
@@ -110,7 +112,7 @@ class CarFragment : Fragment() {
 
             builder.setItems(cars.toArray(arrayOfNulls<String>(0))
             ) { dialogInterface, i ->
-                car_number.text = cars.toArray().get(i).toString()
+                car_number.setText(cars.toArray().get(i).toString())
             }
 
             val mDialog = builder.create()
@@ -140,14 +142,15 @@ class CarFragment : Fragment() {
                 //val car: String
                 for(car in cars){
                     if(car.equals(car_number.text.toString())) {
-                        currentUserDb.child("Cars").child(car).child("active").setValue("1")
-                    }else{
-                        currentUserDb.child("Cars").child(car).child("active").setValue("0")
+                        currentUserDb.child("Cars").child("active").setValue(car)
                     }
                 }
                 //currentUserDb.child("Cars").child(result.contents).child("active").setValue("1")
             }
         }
+        car_bluetooth?.setOnClickListener (
+            Navigation.createNavigateOnClickListener(R.id.nav_fragment_bluetooth)
+        )
         car_log_out?.setOnClickListener{signOut()}
 
     }

@@ -18,7 +18,8 @@ import kotlinx.android.synthetic.main.search_friends_row.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Search_Adapter(private var userNames: ArrayList<String>, private var usersId: ArrayList<String>, private var name: String?) :
+class Search_Adapter(private var userNames: ArrayList<String>, private var usersId: ArrayList<String>, private var name: String?,
+                     private var flag: ArrayList<Boolean>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     var userNamesFilterList = ArrayList<String>()
@@ -50,7 +51,7 @@ class Search_Adapter(private var userNames: ArrayList<String>, private var users
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.srow_text.text = userNamesFilterList[position]
-
+        holder.itemView.srow_toggle.isChecked = flag[position]
         holder.itemView.setOnClickListener {
 
             Toast.makeText(mcontext, userNamesFilterList[position], Toast.LENGTH_LONG).show()

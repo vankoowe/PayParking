@@ -82,13 +82,20 @@ class AllFragment : Fragment() {
                         users.add(childSnapshot.child("Name").value.toString())
                     }
                 }
-                val arrayAdapter: ArrayAdapter<String> = ArrayAdapter(
-                    requireContext(), android.R.layout.simple_expandable_list_item_1, users)
+                if(!users.isEmpty()) {
+                    val arrayAdapter: ArrayAdapter<String> = ArrayAdapter(
+                        requireContext(), android.R.layout.simple_expandable_list_item_1, users
+                    )
 
-                all_rv.adapter = arrayAdapter
+                    all_rv.adapter = arrayAdapter
 
-                all_rv.setOnItemClickListener{ adapter, view, i, l ->
-                    Toast.makeText(activity, adapter.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show()
+                    all_rv.setOnItemClickListener { adapter, view, i, l ->
+                        Toast.makeText(
+                            activity,
+                            adapter.getItemAtPosition(i).toString(),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
             }
