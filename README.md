@@ -18,3 +18,7 @@
 * Maintain a list of friends.
 * Administrator support panel to allow support from users.
 * Administrator support panel for adding and changing parking zones.
+
+## Documentation
+* [Ivan Gamov's documentation](https://docs.google.com/document/d/1SCc8-mNBqwbFYKvSNiKoMStlybJ4pkw8IpSouEYGWmc/edit?usp=sharing)
+* [Konstatin Grigorov's documentation](https://docs.google.com/document/d/1GgyI6BgZa2N5h33rDPzTCpNlrEYuuGSbvtoUoATotkQ/edit?usp=sharing)
